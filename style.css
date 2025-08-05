@@ -16,10 +16,10 @@ to this section's matching END comment to see page-specific styles.
 
 /* Our default values set as CSS variables */
 :root {
-  --color-bg: #69F7BE;
-  --color-text-main: #000000;
-  --color-text-header: #2800FF;
-  --color-primary: #FFFF00;
+  --color-bg: #DDE8EA;
+  --color-text-main: #1C3D41;
+  --color-text-header: #2F5C63;
+  --color-primary: #C2D6D9;
   --wrapper-height: 87vh;
   --image-max-width: 300px;
   --image-margin: 3rem;
