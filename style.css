@@ -1,25 +1,8 @@
-/******************************************************************************
-START Glitch hello-app default styles
-
-The styles in this section do some minimal CSS resets, set default fonts and 
-colors, and handle the layout for our footer and "Remix on Glitch" button. If
-you're new to CSS they may seem a little complicated, but you can scroll down
-to this section's matching END comment to see page-specific styles.
-******************************************************************************/
-
-
-/* 
-  The style rules specify elements by type and by attributes such as class and ID
-  Each section indicates an element or elements, then lists the style properties to apply
-  See if you can cross-reference the rules in this file with the elements in index.html
-*/
-
-/* Our default values set as CSS variables */
 :root {
-  --color-bg: #69F7BE;
-  --color-text-main: #000000;
-  --color-text-header: #2800FF;
-  --color-primary: #FFFF00;
+  --color-bg: #DDE8EA;
+  --color-text-main: #1C3D41;
+  --color-text-header: #2F5C63;
+  --color-primary: #C2D6D9;
   --wrapper-height: 87vh;
   --image-max-width: 300px;
   --image-margin: 3rem;
@@ -48,7 +31,7 @@ to this section's matching END comment to see page-specific styles.
     format("opentype");
 }
 
-/* Our remix on glitch button */
+/* Remix button */
 .btn--remix {
   font-family: HK Grotesk;
   padding: 0.75rem 1rem;
@@ -59,11 +42,11 @@ to this section's matching END comment to see page-specific styles.
   align-items: center;
   cursor: pointer;
   background: #FFFFFF;
-  border: 1px solid #000000;
+  border: 1px solid var(--color-text-main);
   box-sizing: border-box;
   border-radius: 4px;
   text-decoration: none;
-  color: #000;
+  color: var(--color-text-main);
   white-space: nowrap;
   margin-left: auto;
 }
@@ -71,10 +54,10 @@ to this section's matching END comment to see page-specific styles.
   margin-right: 0.5rem;
 }
 .btn--remix:hover {
-  background-color: #D0FFF1;
+  background-color: var(--color-primary);
 }
 
-/* Navigation grid */
+/* Footer */
 .footer {
   display: flex;
   justify-content: space-between;
@@ -91,7 +74,7 @@ a:not(.btn--remix):visited {
   font-style: normal;
   font-weight: normal;
   font-size: 1.1rem;
-  color: #000;
+  color: var(--color-text-main);
   text-decoration: none;
   border-style: none;
 }
@@ -107,16 +90,14 @@ a:not(.btn--remix):visited {
 .divider {
   padding: 0 1rem;
 }
-/******************************************************************************
-END Glitch hello-app default styles
-******************************************************************************/
 
+/* Body */
 body {
   font-family: HK Grotesk;
   background-color: var(--color-bg);
 }
 
-/* Page structure */
+/* Structure */
 .wrapper {
   min-height: var(--wrapper-height);
   display: grid;
@@ -130,7 +111,7 @@ body {
   justify-content: center;
 }
 
-/* Very light scaling for our illustration */
+/* Title */
 .title {
   color: var(--color-text-header);
   font-family: HK Grotesk;
@@ -141,11 +122,14 @@ body {
   margin: 0;
 }
 
-/* Very light scaling for our illustration */
+/* Illustration */
 .illustration {
   max-width: 100%;
   max-height: var(--image-max-width);
   margin-top: var(--image-margin);
+}
+.illustration:active {
+  transform: translateY(5px);
 }
 
 /* Instructions */
@@ -153,13 +137,13 @@ body {
   margin: 1rem auto 0;
 }
 
-/* Button - Add it from the README instructions */
+/* Inputs & buttons */
 button,
 input {
   font-family: inherit;
   font-size: 100%;
   background: #FFFFFF;
-  border: 1px solid #000000;
+  border: 1px solid var(--color-text-main);
   box-sizing: border-box;
   border-radius: 4px;
   padding: 0.5rem 1rem;
@@ -171,29 +155,23 @@ h2 {
   color: var(--color-text-header);
 }
 
-/* Interactive image */
-.illustration:active {
-  transform: translateY(5px);
-}
-
-/* Button dip
-- Toggling this class on and off will move it down and up again
-- The button transition property above determines the speed of the translate (500ms)
-*/
+/* Button dip */
 .dipped {
   transform: translateY(5px);
 }
 
-/* Links that open files in the editor */
+/* File opener links */
 .fileopener {
   cursor:pointer;
   font-weight:bold;
   border-bottom:3px solid var(--color-primary);
-  color: var(--color-secondary);
+  color: var(--color-text-header);
 }
 .fileopener:hover {
-  border-bottom:3px solid var(--color-secondary);
+  border-bottom:3px solid var(--color-text-header);
 }
+
+/* Blob styles */
 #blob-container {
   position: absolute;
   top: 50%;
@@ -202,17 +180,18 @@ h2 {
   height: 270px;
   transform: translate(-50%, -50%);
   z-index: 0;
-  pointer-events: none; /* Don't block interactions */
+  pointer-events: none;
 }
 
 #custom-blob {
   width: 100%;
   height: 100%;
-  opacity: 1; /* Optional softness */
-  mix-blend-mode: multiply; /* optional: prevents light blending */
+  opacity: 1;
+  mix-blend-mode: multiply;
 }
 
+/* Canvas */
 canvas {
   position: relative;
-  z-index: 1; /* Ensures canvas is above blob */
+  z-index: 1;
 }
