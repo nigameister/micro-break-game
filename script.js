@@ -10,7 +10,7 @@ let blobDiv;
 
 function setup() {
   let canvas = createCanvas(windowWidth, windowHeight);
-canvas.parent("game-container");
+  canvas.parent("game-container");
 
   textFont("sans-serif");
   setupLevel(level);
@@ -19,23 +19,23 @@ canvas.parent("game-container");
 
 function draw() {
   if (gameState === "intro") {
-  clear(); // keep blob visible
-} else {
-  background("#F2E6E3"); // solid for levels
-}
+    clear(); // keep blob visible
+  } else {
+    background("#DDE8EA"); // updated background color
+  }
 
   noStroke();
-  fill("#8C6D67");
+  fill("#1C3D41"); // updated text color
   textAlign(CENTER, CENTER);
 
   if (blobDiv) {
-  if (gameState === "intro") {
-    blobDiv.show();
-  } else {
-    blobDiv.hide();
+    if (gameState === "intro") {
+      blobDiv.show();
+    } else {
+      blobDiv.hide();
+    }
   }
-}
-  
+
   if (gameState === "intro") {
     textSize(18);
     text("Take a moment for yourself", width / 2, height / 2 - 40);
@@ -61,7 +61,7 @@ function draw() {
     });
   } else if (gameState === "intermediate2") {
     textSize(16);
-    text("Still with it. Love that.", width / 2, height / 2 -40);
+    text("Still with it. Love that.", width / 2, height / 2 - 40);
     drawStyledButton("One more?", height / 2, () => {
       level = 3;
       setupLevel(level);
@@ -75,9 +75,7 @@ function draw() {
       "\nThis was vibe-coded to help you pause.\nIf you’re recharged… the rest of the site is waiting.",
       width / 2,
       height * 0.52
-    
     );
-   
   }
 
   if (gameState === "level") {
@@ -89,7 +87,7 @@ function drawStyledButton(label, y, onClick) {
   let w = 280;
   let h = 48;
   let x = width / 2 - w / 2;
-  fill("#D9B9B3");
+  fill("#2F5C63"); // updated button fill
   rect(x, y, w, h, 12);
   fill("#ffffff");
   textSize(16);
@@ -107,7 +105,7 @@ function drawStyledButton(label, y, onClick) {
 }
 
 function drawMaze() {
-  fill("#8C6D67");
+  fill("#1C3D41"); // updated text color
   textSize(14);
   text(
     "Drag the circle along the curve to reach the other side.",
@@ -116,7 +114,7 @@ function drawMaze() {
   );
 
   noFill();
-  stroke("#BFA5A0");
+  stroke("#C2D6D9"); // updated curve stroke
   strokeWeight(0.035 * min(width, height));
   beginShape();
   curveVertex(path[0].x, path[0].y);
@@ -125,11 +123,11 @@ function drawMaze() {
   endShape();
 
   noStroke();
-  fill("#F5F3F0");
+  fill("#C2D6D9"); // updated end zone
   ellipse(endZone.x, endZone.y, 0.07 * min(width, height));
 
-  fill("#D9B9B3");
-  stroke("#8C6D67");
+  fill("#2F5C63"); // updated player fill
+  stroke("#1C3D41"); // updated stroke
   ellipse(player.x, player.y, 0.06 * min(width, height));
 
   if (p5.Vector.dist(player, endZone) < 0.035 * min(width, height)) {
@@ -146,7 +144,7 @@ function drawStrayMessage() {
   push();
   resetMatrix();
   noStroke();
-  fill("#8C6D67");
+  fill("#1C3D41"); // updated stray text color
   textSize(16);
   textAlign(CENTER, CENTER);
   text(
