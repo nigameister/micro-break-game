@@ -4,51 +4,51 @@
   <meta charset="utf-8" />
   <title>Micro-Break Game</title>
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-      background: white;
-      height: 100%;
-      width: 100%;
-    }
+  html, body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: white;
+    height: 100%;
+    width: 100%;
+  }
 
-    #game-container {
-      position: relative;
-      width: 100%;
-      height: 100vh;
-    }
+  #game-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+  }
 
-    #blob-container {
-      position: absolute;
-      top: 45%;
-      left: 50%;
-      width: 300px;
-      height: 270px;
-      transform: translate(-50%, -50%);
-      z-index: -0.5; /* ✅ Put ABOVE canvas */
-      pointer-events: none; /* ✅ So canvas interactions still work */
-    }
+  #blob-container {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    width: 300px;
+    height: 270px;
+    transform: translate(-50%, -50%);
+    z-index: -0.5; /* ✅ Put ABOVE canvas */
+    pointer-events: none; /* ✅ So canvas interactions still work */
+  }
 
-    #custom-blob {
-      width: 100%;
-      height: 100%;
-      opacity: 0.5;
-    }
+  #custom-blob {
+    width: 100%;
+    height: 100%;
+    opacity: 0.5;
+  }
 
-    canvas {
-      position: relative;
-      z-index: 0; /* 👈 keep canvas below blob */
-      display: block;
-    }
+  canvas {
+    position: relative;
+    z-index: 0; /* 👈 keep canvas below blob */
+    display: block;
+  }
+
   </style>
 </head>
-
+  
 <body>
   <div id="game-container">
     <div id="blob-container">
       <svg id="custom-blob" viewBox="0 0 523 475" xmlns="http://www.w3.org/2000/svg">
-        <!-- ✅ CHANGED FILL COLOR TO MATCH THEME -->
         <path fill="#DDE8EA"
           d="M65.1,436C65.1,436,-55.767,369.868,31.1,238.1C119.767,108.132,49.833,-41.71,242.1,11.1C436.167,65.71,631.965,276.879,450.1,332.1C270.035,389.121,206.863,546.998,65.1,436Z" />
       </svg>
