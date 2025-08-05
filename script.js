@@ -1,47 +1,38 @@
+let gameState = "intro";
+let player = { x: 0, y: 0 };
 let path = [];
-let player;
-let endZone;
-let gameState = "intro"; // intro, level1, win, stray
+let endZone = {};
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  generatePath();
-  player = createVector(path[0].x, path[0].y);
-  endZone = path[path.length - 1].copy();
+  initMaze();
 }
 
 function draw() {
   if (gameState === "intro") {
-    clear(); // keep blob visible
+    clear(); // show blob
   } else {
-    background("#DDE8EA"); // solid for levels
+    background("#DDE8EA");
   }
 
   noStroke();
   fill("#1C3D41");
   textAlign(CENTER, CENTER);
-  textFont("sans-serif");
 
   if (gameState === "intro") {
-    textSize(32);
-    text("Take a Micro-Break", width / 2, height * 0.3);
-    drawStyledButton("Start Game", height * 0.5, () => {
-      gameState = "level1";
+    textSize(22);
+    text("Take a Micro-Break", width / 2, height / 2 - 60);
+    drawStyledButton("Start", height / 2 + 10, () => {
+      gameState = "level";
     });
-  } else if (gameState === "level1") {
+  } else if (gameState === "level") {
     drawMaze();
-    handlePlayer();
-  } else if (gameState === "win") {
-    textSize(28);
-    text("🎉 Well Done!", width / 2, height * 0.3);
-    drawStyledButton("Play Again", height * 0.5, () => {
-      gameState = "intro";
-      generatePath();
-      player = createVector(path[0].x, path[0].y);
-    });
-  } else if (gameState === "stray") {
-    drawMaze();
-    drawStrayMessage();
+    if (dist(player.x, player.y, endZone.x, endZone.y) < 30) {
+      gameState = "done";
+    }
+  } else if (gameState === "done") {
+    textSize(22);
+    text("Great job 🙌", width / 2, height / 2);
   }
 }
 
@@ -56,25 +47,30 @@ function drawStyledButton(label, y, onClick) {
   text(label, x + w / 2, y + h / 2);
 
   if (
+    mouseIsPressed &&
     mouseX > x &&
     mouseX < x + w &&
     mouseY > y &&
-    mouseY < y + h &&
-    mouseIsPressed
+    mouseY < y + h
   ) {
     onClick();
   }
 }
 
-function generatePath() {
+function initMaze() {
   path = [];
-  let margin = width * 0.1;
-  let points = 6;
-  for (let i = 0; i < points; i++) {
-    let x = map(i, 0, points - 1, margin, width - margin);
-    let y = height / 2 + sin(i * TWO_PI / points) * height * 0.2;
-    path.push(createVector(x, y));
+  let margin = 80;
+  for (let i = 0; i < 6; i++) {
+    path.push({
+      x: map(i, 0, 5, margin, width - margin),
+      y: height / 2 + 100 * sin(i * PI * 0.5),
+    });
   }
+
+  player.x = path[0].x;
+  player.y = path[0].y;
+  endZone.x = path[path.length - 1].x;
+  endZone.y = path[path.length - 1].y;
 }
 
 function drawMaze() {
@@ -104,48 +100,7 @@ function drawMaze() {
   ellipse(player.x, player.y, 0.06 * min(width, height));
 }
 
-function handlePlayer() {
-  if (mouseIsPressed) {
-    player.x = mouseX;
-    player.y = mouseY;
-
-    let d = dist(player.x, player.y, endZone.x, endZone.y);
-    if (d < 0.05 * min(width, height)) {
-      gameState = "win";
-    }
-
-    let offPath = true;
-    for (let v of path) {
-      if (dist(player.x, player.y, v.x, v.y) < 0.06 * min(width, height)) {
-        offPath = false;
-        break;
-      }
-    }
-    if (offPath) {
-      gameState = "stray";
-      setTimeout(() => {
-        gameState = "level1";
-        player = createVector(path[0].x, path[0].y);
-      }, 1500);
-    }
-  }
-}
-
-function drawStrayMessage() {
-  push();
-  resetMatrix();
-  noStroke();
-  fill("#1C3D41");
-  textSize(16);
-  textAlign(CENTER, CENTER);
-  text(
-    "Oops, it happens 😄 Try staying closer to the path.",
-    width / 2,
-    height * 0.85
-  );
-  pop();
-}
-
-function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
+function mouseDragged() {
+  player.x = mouseX;
+  player.y = mouseY;
 }
